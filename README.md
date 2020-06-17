@@ -71,7 +71,21 @@
 * * *
 [2.5 Dart Dev Tools 시작]   
 -> Dart Dev Tools을 활용하면 웹앱의 디버깅을 할 수 있다.   
--> 
+-> cmd -> 프로젝트 디렉토리 이동 -> flutter run -d chrome -> DevTools에 대한 웹 소켓 정보를 가져옴   
+-> 디버그 서비스 주소를 복사한다.//127.0.0.1:57187/************   
+-> Dev Tools 설치 확인 (각자의 ide에 맞게 공식 문서에 설치법 나와있음)   
+-> View/Commen Palette -> Dart: Open DevTools 입력   
+-> 활성화 , 업그레이드 하여 패키지 활성화 시킨다. (DevTools가 브라우저에서 시작되어 자동으로 디버그 세션에 연결됨)   
+-> 안됨.. 그럴땐 cmd 창에서 실행 -> flutter pub global activate devtools //설치 -> flutter pub global run devtools // 실행   
+-> Serving DevTools at http://127.0.0.1:9100 표시되면 성공   
+-> 크롬 브라우저에서 표시된 url 입력 하면 dart devtools 창이 뜸   
+-> 앱을 실행하고 디버그 서비스 주소를 복사하여 dart devtools connect에 입력하여 dev tools와 실행중인 앱을 연결   
+-> dev tools 에서 main.dart 활성화하고 원하는 곳에 중단점을 설정할 수 있다. 후에 앱에서 활동을 시작하면 중단점에서 앱이 중지된다.   
+-> 디버깅 결과를 확인할 수 있다.   
+* * *
+[3 로그인 진행을 위한 애니메이션 추가]   
+
+* * *
 This project is a starting point for a Flutter application.
 
 A few resources to get you started if this is your first Flutter project:
