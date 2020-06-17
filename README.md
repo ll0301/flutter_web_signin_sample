@@ -50,8 +50,8 @@
 -> Flutter는 상태 정보를 State Class에 저장한다.   
 -> Dart 컴파일러는 밑줄이 붙은 식별자에 대해 프라이버시를 시행한다.    
 - 관찰
-* _showWelcomeScreen() 메소드는 build() 메소드에서 콜백 함수로 사용된다. (버튼을 누를 때 이 방법을 호출한다 라는 의미)   
-* 플러터에는 하나의 Navigator객체만 있다. 이 위젯은 스택 내에서 플러터의 화면을 관리한다. 새 화면을 스택으로 밀어 디스플레이가 전환된다. 이것이 _showWelcomeScreen 함수를 WelcomeScreen 클래스에서 스택으로 푸시하는 이유이다.     
+ - _showWelcomeScreen() 메소드는 build() 메소드에서 콜백 함수로 사용된다. (버튼을 누를 때 이 방법을 호출한다 라는 의미)   
+ - 플러터에는 하나의 Navigator객체만 있다. 이 위젯은 스택 내에서 플러터의 화면을 관리한다. 새 화면을 스택으로 밀어 디스플레이가 전환된다. 이것이 _showWelcomeScreen 함수를 WelcomeScreen 클래스에서 스택으로 푸시하는 이유이다.     
 * * *
 [2. 로그인 진행상황 progress tracking]    
 * * *
