@@ -84,7 +84,10 @@
 -> 디버깅 결과를 확인할 수 있다.   
 * * *
 [3 로그인 진행을 위한 애니메이션 추가]   
-
+-> 로그인영역 맨 위에 LinearProgressIndicator 애니메이션을 생성한다.   
+-> 파일 맨 아래에 AnimatedProgressIndicator를 추가   
+-> _SignUpFormState의 form()에 AnimatedProgressIndicator(value: _formProgress), 를 추가한다.   
+-> 앱을 실행하면 세개의 필드에 아무것도 임력하지 않았을 때 빨간색, 1개 주황색, 2개 노란색, 3개 초록색으로 애니메이션이 적용된 것을 확인할 수 있다.   
 * * *
 This project is a starting point for a Flutter application.
 
