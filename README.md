@@ -49,21 +49,6 @@
 -> SignUpForm클래스는 상태 위젯이다. 이는 단순히 사용자 입력 또는 피드의 데이터와 같이 변경할 수 있는 정보를 저장함을 의미한다.    
 -> Flutter는 상태 정보를 State Class에 저장한다.   
 -> Dart 컴파일러는 밑줄이 붙은 식별자에 대해 프라이버시를 시행한다.    
-   
--> lib/main.dart 파일의 WelcomScreen위젯에 클래스 정의를 추가한다.   
-
--> 클래스 (_SignUpFormState)   
-  -> SignUp 버튼을 만드는 코드의 일부이다.   
-  -> 파란색 배경에 흰색 텍스트이며 누르면 아무것도 수행되지 않는다.   
-  -> 내부에 있는 FlatButton의 onPressed 속성에 _showWelcomeScreen 을 추가한다.   
-  -> onPressed: _showWelcomeScreen,   
-     
--> 클래스 내부에 showWelcomeScreen 메소드 추가    
-    
--> 클래스 (SignUpApp) 의 routes에 다음을 추가한다.   
--> '/welcome': (context) => WelcomeScreen(),   
--> 앱을 실행하고 SignUp 버튼을 클릭하고 Welcome 화면이 보이면 성공   
-   
 - 관찰   
 * _showWelcomeScreen() 메소드는 build() 메소드에서 콜백 함수로 사용된다. (버튼을 누를 때 이 방법을 호출한다 라는 의미)   
 * 플러터에는 하나의 Navigator객체만 있다. 이 위젯은 스택 내에서 플러터의 화면을 관리한다. 새 화면을 스택으로 밀어 디스플레이가 전환된다. 이것이 _showWelcomeScreen 함수를 WelcomeScreen 클래스에서 스택으로 푸시하는 이유이다.     
