@@ -8,6 +8,8 @@ class SignUpApp extends StatelessWidget {
     return MaterialApp(
       routes: {
         '/': (context) => SignUpScreen(),
+        // 경로 추가 
+        '/welcome': (context) => WelcomeScreen(),
       },
     );
   }
@@ -35,6 +37,19 @@ class SignUpForm extends StatefulWidget {
   _SignUpFormState createState() => _SignUpFormState();
 }
 
+// Welcome screen 위젯 추가 
+class WelcomeScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Text('Welcome!', style: Theme.of(context).textTheme.headline2),
+      ),
+    );
+  }
+}
+
+
 class _SignUpFormState extends State<SignUpForm> {
   final _firstNameTextController = TextEditingController();
   final _lastNameTextController = TextEditingController();
@@ -42,13 +57,40 @@ class _SignUpFormState extends State<SignUpForm> {
 
   double _formProgress = 0;
 
+  // signup 버튼을 눌럿을 때 콜백 메소드를 생성 
+  void _showWelcomeScreen() {
+    Navigator.of(context).pushNamed('/welcome');
+  }
+  // 프로그레스 진행 메소드 
+  // 비어있지 않은 텍스트 필드 수에 따라 업데이트 된다. 
+  void _updateFormProgress() {
+  var progress = 0.0;
+  var controllers = [
+    _firstNameTextController,
+    _lastNameTextController,
+    _usernameTextController
+  ];
+
+  for (var controller in controllers) {
+    if (controller.value.text.isNotEmpty) {
+      progress += 1 / controllers.length;
+    }
+  }
+
+  setState(() {  
+    _formProgress = progress;
+  });
+}
+
   @override
   Widget build(BuildContext context) {
+    
     return Form(
+      onChanged: _updateFormProgress, // New
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          LinearProgressIndicator(value: _formProgress),
+          AnimatedProgressIndicator(value: _formProgress), // new
           Text('Sign Up', style: Theme
               .of(context)
               .textTheme
@@ -77,10 +119,71 @@ class _SignUpFormState extends State<SignUpForm> {
           FlatButton(
             color: Colors.blue,
             textColor: Colors.white,
-            onPressed: null,
+            // 콜백 메소드 셋팅 
+            onPressed: _formProgress == 1 ? _showWelcomeScreen : null, // UPDATED
             child: Text('Sign up'),
           ),
         ],
+      ),
+    );
+  }
+}
+class AnimatedProgressIndicator extends StatefulWidget {
+  final double value;
+
+  AnimatedProgressIndicator({
+    @required this.value,
+  });
+
+  @override
+  State<StatefulWidget> createState() {
+    return _AnimatedProgressIndicatorState();
+  }
+}
+
+class _AnimatedProgressIndicatorState extends State<AnimatedProgressIndicator>
+    with SingleTickerProviderStateMixin {
+  AnimationController _controller;
+  Animation<Color> _colorAnimation;
+  Animation<double> _curveAnimation;
+
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+        duration: Duration(milliseconds: 1200), vsync: this);
+
+    var colorTween = TweenSequence([
+      TweenSequenceItem(
+        tween: ColorTween(begin: Colors.red, end: Colors.orange),
+        weight: 1,
+      ),
+      TweenSequenceItem(
+        tween: ColorTween(begin: Colors.orange, end: Colors.yellow),
+        weight: 1,
+      ),
+      TweenSequenceItem(
+        tween: ColorTween(begin: Colors.yellow, end: Colors.green),
+        weight: 1,
+      ),
+    ]);
+
+    _colorAnimation = _controller.drive(colorTween);
+    _curveAnimation = _controller.drive(CurveTween(curve: Curves.easeIn));
+  }
+
+  void didUpdateWidget(oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _controller.animateTo(widget.value);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (context, child) => LinearProgressIndicator(
+        value: _curveAnimation.value,
+        valueColor: _colorAnimation,
+        backgroundColor: _colorAnimation.value.withOpacity(0.4),
       ),
     );
   }
