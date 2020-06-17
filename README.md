@@ -50,7 +50,7 @@
 -> Flutter는 상태 정보를 State Class에 저장한다.   
 -> Dart 컴파일러는 밑줄이 붙은 식별자에 대해 프라이버시를 시행한다.    
    
--> lib/main.dart 파일의 WelcomScreen위젯에 다음 클래스 정의를 추가한다.
+-> lib/main.dart 파일의 WelcomScreen위젯에 다음 클래스 정의를 추가한다.   
    class WelcomeScreen extends StatelessWidget {
      @override
      Widget build(BuildContext context) {
@@ -67,13 +67,13 @@
   -> 내부에 있는 FlatButton의 onPressed 속성에 _showWelcomeScreen 을 추가한다.   
   -> onPressed: _showWelcomeScreen,   
    
--> 클래스 내부에 showWelcomeScreen 메소드 추가   
+-> 클래스 내부에 showWelcomeScreen 메소드 추가    
    void _showWelcomeScreen() {
      Navigator.of(context).pushNamed('/welcome');
    }
    
 -> 클래스 (SignUpApp) 의 routes에 다음을 추가한다.   
-   '/welcome': (context) => WelcomeScreen(),   
+-> '/welcome': (context) => WelcomeScreen(),   
 -> 앱을 실행하고 SignUp 버튼을 클릭하고 Welcome 화면이 보이면 성공    
 - 관찰   
 * _showWelcomeScreen() 메소드는 build() 메소드에서 콜백 함수로 사용된다. (버튼을 누를 때 이 방법을 호출한다 라는 의미)   
