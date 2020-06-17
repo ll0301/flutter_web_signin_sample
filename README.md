@@ -49,12 +49,29 @@
 -> SignUpForm클래스는 상태 위젯이다. 이는 단순히 사용자 입력 또는 피드의 데이터와 같이 변경할 수 있는 정보를 저장함을 의미한다.    
 -> Flutter는 상태 정보를 State Class에 저장한다.   
 -> Dart 컴파일러는 밑줄이 붙은 식별자에 대해 프라이버시를 시행한다.    
+-> WelcomeScreen 클래스 생성   
+-> _SingUpFormState 내부에 _showWelcomeScreen 메소드 생성하고 버튼의 onPressed 속성에 해당 함수를 추가한다.   
+
+-> SignUpApp 내부에 -> '/welcome': (context) => WelcomeScreen(), 경로를 추가한다.   
+
 - 관찰
   - _showWelcomeScreen() 메소드는 build() 메소드에서 콜백 함수로 사용된다. (버튼을 누를 때 이 방법을 호출한다 라는 의미)   
-  - 플러터에는 하나의 Navigator객체만 있다. 이 위젯은 스택 내에서 플러터의 화면을 관리한다. 새 화면을 스택으로 밀어 디스플레이가 전환된다. 이것이 _showWelcomeScreen 함수를 WelcomeScreen 클래스에서 스택으로 푸시하는 이유이다.     
+  - 플러터에는 하나의 Navigator객체만 있다. 이 위젯은 스택 내에서 플러터의 화면을 관리한다. 새 화면을 스택으로 밀어 디스플레이가 전환된다. 이것이 _showWelcomeScreen 함수를 WelcomeScreen 클래스에서 스택으로 푸시하는 이유이다.    
 * * *
-[2. 로그인 진행상황 progress tracking]    
+[2. 로그인 진행상황 progress tracking]   
+-> 로그인 화면에 3개의 필드가 있고 필드에 사용자가 입력할 때 진행 상황을 추적하고 완료되면 앱의 ui를 업데이트 하도록한다.   
+-> _SignUpFormState클래스 내부에 _updateFormProgress() 메소드를 추가한다.   
+-> _SignUpFormState클래스 return form() 내부에  -> onChanged: _updateFormProgress, // NEW 코드를 추가한다.   
+-> FlatButton의 onPressed 속성을 다음과 같이 변경 -> _formProgress == 1 ? _showWelcomeScreen : null, // UPDATED    
+-> 앱을 실행하면 세개의 필드가 모두 텍스트를 포함할 때 활성화된다.   
+
+- 관찰
+  - 위젯의 setState() 메소드를 호출하면 flutter에게 위젯을 화면에서 업데이트해야 한다고 알린다. 그 다음 프레임 워크는 이전의 위젯을 처리하고, 하위 위젯트리와 함께 새 위젯을 작성하여 화면에 렌더링 한다. 새로운 위젯 트리는 1/60th 이내에 화면에 렌더링되어 애니메이션을 구현한다. Flutter는 빠르다.   
+  - 세개의 필드가 모두 채워지면 _formProgress가 1.0으로 설정된다. 1.0으로 설정되면 onPress 인수가 null 이 아니게 되어 _showWelcomeScreen을 띄울 수 있다. onPressed 에 Dart의 조건부를 사용하여 구현하였다.   
 * * *
+[2.5 Dart Dev Tools 시작]   
+-> Dart Dev Tools을 활용하면 웹앱의 디버깅을 할 수 있다.   
+-> 
 This project is a starting point for a Flutter application.
 
 A few resources to get you started if this is your first Flutter project:
